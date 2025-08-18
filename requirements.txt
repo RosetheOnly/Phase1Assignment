@@ -1,14 +1,11 @@
 streamlit
-langchain_groq 
-langchain_community 
-pypdf 
-sentence_transformers
 python-dotenv
-chromadb
-langchain-chroma
-# transformers
-langchain-text-splitters
-rank_bm25
-langchain-huggingface
+langchain
+langchain-community
+faiss-cpu
+tiktoken
+openai
+huggingface_hub
 youtube-transcript-api
 pytube
+pandas
