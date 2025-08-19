@@ -2,6 +2,8 @@ streamlit
 python-dotenv
 langchain
 langchain-community
+langchain-core
+langchain-groq
 faiss-cpu
 tiktoken
 openai
@@ -10,4 +12,7 @@ youtube-transcript-api
 pytube
 pandas
 sentence-transformers
+torch
+transformers
+chromadb
 
