@@ -1,21 +1,27 @@
+# helpers/chunker.py
+
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 from typing import List
 
-def chunk_data(data: List[Document], chunk_size: int = 1000, chunk_overlap: int = 100) -> List[Document]:
+def chunk_data(docs: List[Document], chunk_size: int = 1000, chunk_overlap: int = 200) -> List[Document]:
     """
-    Splits a list of documents into smaller chunks.
-    
+    Splits documents into smaller chunks for embedding & retrieval.
+
     Args:
-        data: A list of Document objects to be split.
-        chunk_size: The maximum size of each chunk (in characters).
-        chunk_overlap: The number of characters to overlap between chunks.
-        
+        docs (List[Document]): List of input documents.
+        chunk_size (int): Max size of each chunk.
+        chunk_overlap (int): Overlap between chunks.
+
     Returns:
-        A list of chunked Document objects.
+        List[Document]: List of chunked documents.
     """
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=chunk_size,
-        chunk_overlap=chunk_overlap
+        chunk_overlap=chunk_overlap,
+        separators=["\n\n", "\n", " ", ""]
     )
-    return text_splitter.split_documents(data)
+    
+    chunks = text_splitter.split_documents(docs)
+    print(f"✅ Split {len(docs)} docs into {len(chunks)} chunks.")
+    return chunks
