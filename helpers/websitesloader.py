@@ -3,7 +3,7 @@ import streamlit as st
 from dotenv import load_dotenv
 
 # Import your helpers
-from helpers.websiteloader import load_from_website
+from helpers.websitesloader import load_from_website
 from helpers.chunker import chunk_data
 from helpers.vectorstore import create_vector_store, create_retriever
 from helpers.chain import create_rag_chain
