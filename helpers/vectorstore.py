@@ -1,39 +1,50 @@
 # helpers/vectorstore.py
 
-from langchain_community.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma 
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from typing import List
 from langchain_core.documents import Document
+from langchain_core.vectorstores import VectorStoreRetriever
 
-
-def create_vector_store(docs: List[Document], persist_directory: str = "chroma_store"):
+def create_vector_store(docs: List[Document]):
     """
-    Creates (and persists) a Chroma vector store from a list of documents.
+    Creates a Chroma vector store from a list of documents.
 
     Args:
-        docs (List[Document]): A list of Document objects (chunks).
-        persist_directory (str): Directory to store the Chroma DB locally.
+        docs: A list of Document objects (chunks).
 
     Returns:
-        Chroma: A Chroma vector store instance.
+        A Chroma vector store instance.
     """
-    print("⚡ Creating vector store... This may take a moment.")
-
-    # Initialize the embedding model
+    print("Creating vector store... This may take a moment.")
+    
+    # Initialize the embedding model from Hugging Face
     embedding_model = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2",  # full HuggingFace model name
-        model_kwargs={'device': 'cpu'}  # set 'cuda' if you have a GPU
+        model_name="sentence-transformers/all-MiniLM-L6-v2",
+        model_kwargs={'device': 'cpu'}  # change to 'cuda' if using GPU
     )
 
-    # Create or load Chroma vector store
+    # Create the vector store
     vectorstore = Chroma.from_documents(
         documents=docs,
-        embedding=embedding_model,
-        persist_directory=persist_directory
+        embedding=embedding_model
     )
-
-    # Persist the DB to disk (optional but useful for reloading later)
-    vectorstore.persist()
-
-    print(f"✅ Vector store created and persisted at '{persist_directory}'.")
+    
+    print("✅ Vector store created successfully.")
     return vectorstore
+
+
+def create_retriever(vectorstore, top_k: int = 4) -> VectorStoreRetriever:
+    """
+    Creates a retriever from a vector store.
+
+    Args:
+        vectorstore: A Chroma vector store instance.
+        top_k (int): Number of results to retrieve.
+
+    Returns:
+        A retriever instance.
+    """
+    retriever = vectorstore.as_retriever(search_kwargs={"k": top_k})
+    print(f"✅ Retriever created (top_k={top_k}).")
+    return retriever
