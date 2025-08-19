@@ -33,7 +33,7 @@ phase1assignment/
 │── requirements.txt
 │── helpers/
     │── __init__.py   (can be empty, just to mark it as a package)
-    │── websiteloader.py
+    │── websitesloader.py
     │── chunker.py
     │── vectorstore.py
     │── retriever.py
@@ -44,7 +44,7 @@ phase1assignment/
 
 Clone Repo
 
-git clone https://github.com/<your-username>/naive-rag-chatbot.git
+git clone https://github.com/RosetheOnly/naive-rag-chatbot.git
 cd naive-rag-chatbot
 
 
