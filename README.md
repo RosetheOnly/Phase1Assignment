@@ -28,12 +28,17 @@ HuggingFace Sentence Transformers – embeddings (all-MiniLM-L6-v2).
 OpenAI GPT (or any LLM) – used for generation.
 
 📂 Project Structure
-naive-rag-chatbot/
-│── websiteloader.py    # Main pipeline: load, embed, retrieve, query
-│── requirements.txt     # Dependencies
-│── README.md            # Project documentation
-│── data/                # Cached docs or index (optional)
-│── faiss_index/         # Saved FAISS index (auto-generated)
+phase1assignment/
+│── app.py
+│── requirements.txt
+│── helpers/
+    │── __init__.py   (can be empty, just to mark it as a package)
+    │── websiteloader.py
+    │── chunker.py
+    │── vectorstore.py
+    │── retriever.py
+    │── chain.py
+
 
 ⚙️ Setup Instructions
 
